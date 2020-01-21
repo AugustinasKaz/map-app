@@ -1,0 +1,24 @@
+.over1 {
+  position: absolute;
+  top: 4%;
+  right: -100px;
+  border-right: solid 10px red;
+  z-index: 10;
+  background-color: hotpink;
+  height: 80%;
+  width: 400px;
+  padding: 10px;
+}
+
+.header {
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  background-color: cornflowerblue;
+}
+
+.img_arrows {
+  width: 40px;
+  height: 40px;
+}
+/*# sourceMappingURL=navigation_map.css.map */
