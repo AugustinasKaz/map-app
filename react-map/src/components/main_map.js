@@ -20,6 +20,7 @@ class Main_map extends React.Component {
     };
     this.barsClick = this.barsClick.bind(this);
     this.props_handler = this.props_handler.bind(this);
+    this.add_markers = this.add_markers.bind(this);
 
   }
 
@@ -29,7 +30,7 @@ class Main_map extends React.Component {
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
-      
+
     });
 
     map.on('move', () => {
@@ -41,18 +42,12 @@ class Main_map extends React.Component {
     });
 
     var geojson = {
-      features: [{
-        geometry: {
-          type: 'Point',
-          coordinates: [-77.032, 38.913]
-        },
-        properties: {
-          title: 'Mapbox',
-          description: 'Washington, D.C.'
-        }
-      }]
+      cities: [
+        { city_id: 1, city_name: 'Vilnius', coordinates: ["25.279652", "54.687157"]},
+        { city_id: 2, city_name: 'Kaunas', coordinates: ["23.892429", "54.896870"]}
+      ]
     }
-    geojson.features.forEach(function (marker) {
+    geojson.cities.forEach(function (marker) {
 
       // create a HTML element for each feature
       var el = document.createElement('div');
@@ -60,7 +55,7 @@ class Main_map extends React.Component {
 
       // make a marker for each feature and add to the map
       new mapboxgl.Marker(el)
-        .setLngLat(marker.geometry.coordinates)
+        .setLngLat(marker.coordinates)
         .addTo(map);
     });
 
@@ -76,7 +71,12 @@ class Main_map extends React.Component {
     this.setState({ navig_open: !this.state.navig_open })
   }
 
+  add_markers(data){
+    console.log('sent', data);
+  }
+
   render() {
+    console.log(this.props.cities);
     if (this.state.navig_open === false) {
       return (
         <div className="main">

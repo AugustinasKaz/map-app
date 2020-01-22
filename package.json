@@ -4,11 +4,15 @@
   "description": "Graphql server",
   "main": "index.js",
   "scripts": {
-    "dev:server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "react-map": "npm start --prefix react-map",
+    "dev": "concurrently \"npm run server\" \"npm run react-map\""
   },
   "author": "Augustas",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^5.0.2",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.5.8",
