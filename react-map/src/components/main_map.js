@@ -18,17 +18,17 @@ class Main_map extends React.Component {
       lat: 0,
       zoom: 2,
       navig_open: false,
-      articles: []
+      articles: [],
+      cities: this.props.cities,
+      setCity: this.cityFinder,
     };
     this.barsClick = this.barsClick.bind(this);
     this.props_handler_bars = this.props_handler_bars.bind(this);
     this.test = this.test.bind(this);
-    this.create_map = this.create_map.bind(this);
-    this.props_handler_coors = this.props_handler_coors.bind(this);
   }
 
 
-  create_map() {
+  create_map = () =>{
     const data = this.props.cities;
     const articles = this.state.articles;
 
@@ -123,8 +123,9 @@ class Main_map extends React.Component {
     this.setState({ navig_open: !this.state.navig_open })
   }
 
-  props_handler_coors(lang, lati) {
-    this.setState({ lng: lang, lat: lati, zoom: 6}, () => {
+  cityFinder =(coors) => {
+    this.barsClick()
+    this.setState({ lat: coors[1], lng: coors[0], zoom:6 }, () => {
       this.create_map();
     })
   }
@@ -171,8 +172,8 @@ class Main_map extends React.Component {
           <div className={class1} onClick={this.barsClick}>
             <div ref={el => this.mapContainer = el} className='mapContainer' />
           </div>
-          <CitiesContext.Provider value={this.props.cities}>
-          <Navigation bars_handler={this.props_handler_bars} coors_handler={this.props_handler_coors} />
+          <CitiesContext.Provider value={this.state}>
+          <Navigation bars_handler={this.props_handler_bars}/>
           </CitiesContext.Provider>
         </div>
       )

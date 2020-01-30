@@ -1,24 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import CitiesContext from './context'
 import '../static/nav-style.css'
 
 const City_list = () => {
-    return(
+  const data = useContext(CitiesContext);
+
+  return (
     <CitiesContext.Consumer>
-        {value => (
-        <div class="dropdown">
-        <button class="dropbtn">Cities list</button>
-        <div class="dropdown-content">
-            {value.map((el) =>
-          <li>{el.city_name}</li>
+      {({ cities, setCity }) => (
+        <div className="dropdown">
+          <button className="dropbtn">Cities list</button>
+          <div className="dropdown-content">
+            {cities.map((el) =>
+              <li onClick={() => setCity(el.coordinates)} key={el}>{el.city_name}</li>
             )}
+          </div>
         </div>
-      </div>
-        )}
-        
-  
-        
+      )}
+
+
+
     </CitiesContext.Consumer>
-    )}
+  )
+}
 
 export default City_list;
+

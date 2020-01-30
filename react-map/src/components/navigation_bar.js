@@ -15,7 +15,6 @@ class Navigation_bar extends React.Component {
   }
   btn_test(){
     this.props.bars_handler();
-    this.props.coors_handler(177, 45)
   }
 
   render() {

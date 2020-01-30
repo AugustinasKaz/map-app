@@ -29,6 +29,7 @@
   text-decoration: none;
   display: block;
   &:hover{
+      cursor: pointer;
       opacity:0.5;
   }
 }
