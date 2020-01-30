@@ -1,21 +1,43 @@
+$header_size: 40px;
+$body_color: #262626;
+
 .over1{
     position: absolute;
     top: 4%;
     right:-100px;
-    border-right: solid 10px red;
+    border: 2px solid rgba(255, 255, 255, 0.5);
     z-index: 10;
-    background-color: hotpink;
+    background-color: rgba(38, 38, 38, 0.7);
     height: 80%;
     width:400px;
     padding:10px;
 }
 .header{
-    position: absolute;
-    height:50px;
+    
+    height:$header_size;
     width:100%;
-    background-color: cornflowerblue;
+    
+}
+.header_text{
+    display:inline;
+    font-size: $header_size;
+    margin-left: 20%;
 }
 .img_arrows{
-    width:40px;
-    height:40px;
+    width: $header_size;
+    height: $header_size;
 }
+.menu-display{
+    margin-top: 40px;
+    width:100%;
+    height: 80%;
+    padding:5px;
+}
+.u-list{
+    margin: 0;
+    padding: 0;
+    list-style-type:none;
+    display: flex;
+    align-items: flex-start; 
+}
+

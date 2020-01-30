@@ -1,0 +1,20 @@
+.main {
+  color: white;
+  background-color: #262626;
+}
+
+.head {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 500px;
+}
+
+.spinner {
+  position: absolute;
+  top: 40%;
+  left: 37%;
+  height: 500px;
+  width: 500px;
+  background-color: brown;
+}
+/*# sourceMappingURL=loading_error.css.map */

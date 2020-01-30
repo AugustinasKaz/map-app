@@ -1,12 +1,13 @@
 import React from 'react';
 import Main_map from './components/main_map'
+import Tmp from './components/loading_error'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
+  uri: 'https://map-app2.herokuapp.com/v1/graphql'
 });
 
 const CITIES_QUERY = gql`
@@ -19,22 +20,21 @@ query CitiesQuery{
 }
 `;
 
-class App extends React.Component {
-  render() {
+function App(){
     return (
       <ApolloProvider client={client}>
         <div>
           <Query query={CITIES_QUERY}>
-            {({ loading, error, data }) => {
-              if (error) console.log("ERROR", error);
-              return <Main_map cities={data}/>;
+            {({ loading, error, data}) => {
+              if (error) return <Tmp  info={error}/>;
+              if (loading) return <Tmp info='Loading'/>;
+              return <Main_map cities={data.cities}/>;
             }}
           </Query>
          
         </div>
       </ApolloProvider>
     );
-  }
 }
 
 export default App;

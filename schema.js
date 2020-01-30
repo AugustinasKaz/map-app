@@ -8,50 +8,46 @@ const {
     GraphQLEnum
 } = require('graphql');
 const { Client } = require('pg');
-
-
-
-const DATABASE_URL = 'postgres://xbhkkqzvnqzwjm:510cae2af7209914c02c1e160bb277ea0ca247ed5bacb8248d226944450c782a@ec2-54-174-229-152.compute-1.amazonaws.com:5432/d90g9ggeg795ki';
+const axios = require('axios');
 const cities = []
 
-function fetch_database(){
-    const client = new Client({
-        connectionString: DATABASE_URL,
-        ssl: true,
-    });
-    client.connect();
-    client.query('SELECT*FROM cities;', (err, response) => {
-        if (err)
-            throw err;
-        else {
-            for (let row of response.rows) {
-                cities.push(row);
-            }
-            client.end();
+/*async function add_articles(city) {
+    var tmp_arr = []
+    const promise = await axios.get(`https://newsapi.org/v2/everything?q=${city.city_name}&apiKey=81ed2033ac864fa5bc932f088b9bbc44`);
+    const status = promise.status;
+    if (status === 200) {
+        for (var i = 0; i < 3; i++) {
+            var tmp_obj = { title: promise.data.articles[i].title, url: promise.data.articles[0].url }
+            tmp_arr.push(tmp_obj)
         }
-    });
-}
+        Object.assign(city, { articles: tmp_arr });
+    }
+    else {
+        console.log(status)
+    }
+}*/
 
 
-const CityType = new GraphQLObjectType({
-    name:'City',
-    fields:() => ({
-        city_id: {type:GraphQLInt},
-        city_name: {type: GraphQLString},
-        coordinates: {type: new GraphQLList(GraphQLString)}
+const ArticleType = new GraphQLObjectType({
+    name: 'Article',
+    fields: () => ({
+        title: {type: GraphQLString},
+        url: {type: GraphQLString}
     })
 });
 
-const RootQuery= new GraphQLObjectType({
-    name:'RootQueryType',
-    fields:{
-        cities:{
-            type: new GraphQLList(CityType),
-            resolve(parentValue, args){
-                fetch_database();
-                return cities;
+const RootQuery = new GraphQLObjectType({
+    name: 'RootQueryType',
+    fields: {
+        cities: {
+            type: new GraphQLList(ArticleType),
+            resolve(parentValue, args) {
+                axios.post('https://map-app2.herokuapp.com//v1alpha1/graphql').then(response => {
+                    console.log(response.data);
+                })
+              
             }
-        }   
+        }
     }
 });
 module.exports = new GraphQLSchema({
