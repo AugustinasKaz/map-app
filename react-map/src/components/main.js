@@ -4,7 +4,7 @@ import '../static/main_map.css'
 import bars from '../static/media/abc.jpg';
 import Odometer from "react-odometerjs";
 import "odometer/themes/odometer-theme-train-station.css";
-import Navigation from './navigation_bar'
+import Navigation from './nav-menu'
 import axios from 'axios'
 import CitiesContext from './context'
 
@@ -22,8 +22,6 @@ class Main_map extends React.Component {
       cities: this.props.cities,
       setCity: this.cityFinder,
     };
-    this.barsClick = this.barsClick.bind(this);
-    this.props_handler_bars = this.props_handler_bars.bind(this);
     this.test = this.test.bind(this);
   }
 
@@ -115,14 +113,9 @@ class Main_map extends React.Component {
     this.test();
   }
 
-  barsClick() {
+  barsClick = () => {
     this.setState({ navig_open: !this.state.navig_open })
   }
-
-  props_handler_bars() {
-    this.setState({ navig_open: !this.state.navig_open })
-  }
-
   cityFinder =(coors) => {
     this.barsClick()
     this.setState({ lat: coors[1], lng: coors[0], zoom:6 }, () => {
@@ -173,7 +166,7 @@ class Main_map extends React.Component {
             <div ref={el => this.mapContainer = el} className='mapContainer' />
           </div>
           <CitiesContext.Provider value={this.state}>
-          <Navigation bars_handler={this.props_handler_bars}/>
+          <Navigation bars_handler={this.barsClick}/>
           </CitiesContext.Provider>
         </div>
       )

@@ -1,5 +1,7 @@
 $body_color: #262626;
 $cooridantes_font_size: 24px;
+$s-cooridantes_font_size: 12px;
+
 
 @mixin header_align{
     height:40px;
@@ -77,5 +79,18 @@ $cooridantes_font_size: 24px;
     text-align: center;
     font-family: 'Open Sans', sans-serif;
   }
+
+@media only screen and (max-width: 768px) {
+    .corrs_div{ 
+        @include header_align();
+        font-size: $s-cooridantes_font_size;
+        left: 5%;
+        width:300px;
+    }
+    .bar_img{
+        width:20px;
+        height:20px;
+    }
+}
   
   

@@ -1,9 +1,10 @@
 import React from 'react';
 import '../static/navigation_map.css'
 import arrows from '../static/media/arrows.png';
-import City_list from './nav-city_list'
+import Button1 from './nav-btn1'
+import Button2 from './nav-btn2'
 
-class Navigation_bar extends React.Component {
+class Nav_menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +27,9 @@ class Navigation_bar extends React.Component {
             </div>
             <div className="menu-display">
               <ul className="u-list">
-              <li><City_list/></li>
+              <li><Button1/></li>
+              <br/>
+              <li><Button2/></li>
             </ul>
             </div>
         </div>
@@ -34,4 +37,4 @@ class Navigation_bar extends React.Component {
   }
 }
 
-export default Navigation_bar;
+export default Nav_menu;

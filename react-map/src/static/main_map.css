@@ -80,4 +80,20 @@
   text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
+
+@media only screen and (max-width: 768px) {
+  .corrs_div {
+    height: 40px;
+    position: absolute;
+    top: 4%;
+    background-color: #262626;
+    font-size: 12px;
+    left: 5%;
+    width: 300px;
+  }
+  .bar_img {
+    width: 20px;
+    height: 20px;
+  }
+}
 /*# sourceMappingURL=main_map.css.map */

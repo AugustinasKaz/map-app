@@ -1,10 +1,9 @@
 import React from 'react';
-import Main_map from './components/main_map'
+import Main_map from './components/main'
 import Tmp from './components/loading_error'
 import ApolloClient from 'apollo-boost'
-import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider, Query } from 'react-apollo'
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
 
 const client = new ApolloClient({
   uri: 'https://map-app2.herokuapp.com/v1/graphql'
