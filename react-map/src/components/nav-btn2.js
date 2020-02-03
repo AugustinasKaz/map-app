@@ -11,74 +11,111 @@ class Favorites_list extends React.Component {
       user: localStorage.getItem('user'),
       userInput: " ",
       cityInput: " ",
-      dropdown_open: false
+      dropdown_open: false,
+      loadMessage: "Username will be saved in localStorage",
+      UserCities: {}
     };
     this.addUserToDatabase = this.addUserToDatabase.bind(this);
   }
 
-  async addUserToDatabase(){
-    axios.post()
-  }
-  handleUserInput = (e) => {
-    this.setState({ userInput: e.target.value })
-  }
-  handleCityInput = (e) => {
-    this.setState({ cityInput: e.target.value })
-  }
-
-  dropdownHandle = () =>{
-    this.setState({ dropdown_open: !this.state.dropdown_open })
-  }
-
-  submitValidation = (e) => {
-    if (e.key === 'Enter') {
-      if (this.state.userInput.length > 3) {
-        this.setState({ user: this.state.userInput })
-        localStorage.setItem("user", this.state.userInput);
-        this.addUserToDatabase()
+  async componentDidMount(){
+    if (this.state.user !== null) {
+      const promise = await axios.post('http://localhost:4000/api/getUsersCities', { user: this.state.user });
+      const status = promise.status
+      if (status === 200) {
+          this.setState({UserCities: promise.data})
       }
     }
   }
 
-
-
-  render() {
-    if (this.state.user === null) {
-      return (
-        <div className="dropdown">
-          <button style={{ width: '214%' }} className="dropbtn">Favorite cities</button>
-          <div style={{ width: '199%' }} className="dropdown-content">
-            <h4>Create local user</h4>
-            <input onChange={this.handleUserInput} onKeyPress={this.submitValidation} value={this.state.userInput} className="user-input"></input>
-            <span style={{ fontSize: '12px' }}>Username will be saved in localStorage</span>
-          </div>
-        </div>
-      )
-    }
-    else {
-      if(this.state.dropdown_open === true){
-      return (
-        <div className="dropdown">
-          <button style={{ width: '214%' }} onClick={this.dropdownHandle} className="dropbtn">Favorite cities</button>
-          <div style={{ width: '199%'}} className="dropdown-content">
-            <h5>User: {this.state.user}</h5>
-            <span style={{ fontSize: '12px' }}>Add new city</span>
-            <Autocomplete/>
-            <List user={this.state.user} />
-          </div>
-        </div>
-      )
+    async addUserToDatabase() {
+      this.setState({ loadMessage: "Loading" })
+      const promise = await axios.post('http://localhost:4000/api/addUser', { user: this.state.userInput });
+      const status = promise.status
+      if (status === 200) {
+        let databaseRes = promise.data;
+        if (databaseRes.name === 'error') {
+          this.setState({ loadMessage: databaseRes.detail })
+        }
+        else {
+          this.setState({ user: this.state.userInput });
+          localStorage.setItem('user', this.state.userInput);
+          this.dropdownHandle();
+        }
       }
-      else{
-        return (
-          <div className="dropdown">
-            <button style={{ width: '214%' }} onClick={this.dropdownHandle} className="dropbtn">Favorite cities</button>
-          </div>
-        )
+      else {
+        this.setState({ loadMessage: "Failed to connect" })
+      }
+    }
+
+
+    handleUserInput = (e) => {
+      this.setState({ userInput: e.target.value })
+    }
+    handleCityInput = (e) => {
+      this.setState({ cityInput: e.target.value })
+    }
+
+    dropdownHandle = () => {
+      this.setState({ dropdown_open: !this.state.dropdown_open })
+    }
+
+    submitValidation = (e) => {
+      if (e.key === 'Enter') {
+        if (this.state.userInput.length > 3) {
+          this.addUserToDatabase()
+        }
+      }
+    }
+
+
+
+    render() {
+      //localStorage.removeItem("user");
+      if (this.state.user === null) {
+        if (this.state.dropdown_open === true) {
+          return (
+            <div className="dropdown">
+              <button style={{ width: '214%' }} onClick={this.dropdownHandle} className="dropbtn">Favorite cities</button>
+              <div style={{ width: '199%' }} className="dropdown-content">
+                <h4>Create local user</h4>
+                <input onChange={this.handleUserInput} onKeyPress={this.submitValidation} value={this.state.userInput} className="user-input"></input>
+                <span style={{ fontSize: '12px' }}>{this.state.loadMessage}</span>
+              </div>
+            </div>
+          )
+        }
+        else {
+          return (
+            <div className="dropdown">
+              <button style={{ width: '214%' }} onClick={this.dropdownHandle} className="dropbtn">Favorite cities</button>
+            </div>
+          )
+        }
+      }
+      else {
+        if (this.state.dropdown_open === true) {
+          return (
+            <div className="dropdown">
+              <button style={{ width: '214%' }} onClick={this.dropdownHandle} className="dropbtn">Favorite cities</button>
+              <div style={{ width: '199%' }} className="dropdown-content">
+                <h5>User: {this.state.user}</h5>
+                <Autocomplete user={this.state.user} />
+                <List cities={this.state.UserCities} />
+              </div>
+            </div>
+          )
+        }
+        else {
+          return (
+            <div className="dropdown">
+              <button style={{ width: '214%' }} onClick={this.dropdownHandle} className="dropbtn">Favorite cities</button>
+            </div>
+          )
+        }
       }
     }
   }
-}
 
-export default Favorites_list;
+  export default Favorites_list;
 

@@ -1,14 +1,9 @@
 import React from 'react';
 import '../../static/nav-style.css'
+import CitiesContext from './UserContext'
 
-class Favorites_list extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: this.props.user,
-    };
-  }
-  render() {
+function Favorites_list(){
+  const UsersCities = useContext(CitiesContext)
     return (
       <ul>
           <li>City1</li>
