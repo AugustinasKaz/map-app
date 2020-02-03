@@ -1,14 +1,16 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import '../../static/nav-style.css'
 import CitiesContext from '../context'
 
 function Favorites_list(props) {
   const data = useContext(CitiesContext)
+  const userCities = props.cities
   var filtered = data.cities.filter(
     function (e) {
       return this.indexOf(e.city_name) >= 0;
-    }, props.cities.favorite_cities);
-  console.log(filtered);
+    },
+    userCities
+  );
   return (
     <CitiesContext.Consumer>
       {({ cities, setCity }) => (

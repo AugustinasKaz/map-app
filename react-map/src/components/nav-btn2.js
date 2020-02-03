@@ -101,7 +101,7 @@ class Favorites_list extends React.Component {
               <div style={{ width: '199%' }} className="dropdown-content">
                 <h5>User: {this.state.user}</h5>
                 <Autocomplete user={this.state.user} />
-                <List cities={this.state.UserCities} />
+                {this.state.UserCities.favorite_cities === undefined ?<h4>Loading</h4>: <List cities={this.state.UserCities.favorite_cities} />}
               </div>
             </div>
           )
