@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../../static/nav-style.css'
-import CitiesContext from './UserContext'
+import CitiesContext from '../context'
 
-function Favorites_list(){
-  const UsersCities = useContext(CitiesContext)
-    return (
-      <ul>
-          <li>City1</li>
-          <li>City2</li>
-          <li>City3</li>
-      </ul>
-    )
-   }
+function Favorites_list(props) {
+  const data = useContext(CitiesContext)
+  var filtered = data.cities.filter(
+    function (e) {
+      return this.indexOf(e.city_name) >= 0;
+    }, props.cities.favorite_cities);
+  console.log(filtered);
+  return (
+    <CitiesContext.Consumer>
+      {({ cities, setCity }) => (
+        <ul>
+          {filtered.map((el) =>
+            <li onClick={() => setCity(el.coordinates)} key={el.city_id}>{el.city_name}</li>
+          )}
+        </ul>
+      )}
+    </CitiesContext.Consumer>
+  )
 }
+
 
 export default Favorites_list;
 
