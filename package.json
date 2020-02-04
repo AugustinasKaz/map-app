@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon index.js",
+    "heroku-postbuild": "cd react-map && npm install && npm run build",
     "react-map": "npm start --prefix react-map",
     "dev": "concurrently \"npm run server\" \"npm run react-map\""
   },
