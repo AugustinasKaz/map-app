@@ -128,7 +128,6 @@ class Main_map extends React.Component {
 
   render() {
     if (this.state.navig_open === false) {
-      if (this.state.loading === false) {
         return (
           <div className="main">
             <div className='sidebarStyle'>
@@ -147,20 +146,6 @@ class Main_map extends React.Component {
             </div>
           </div>
         )
-      }
-      else {
-        return (
-          <div className="main">
-            <div className='sidebarStyle'>
-              <h1 style={{position: "absolute", left: "47%", top: "4%"}}>Loading...</h1>
-              <h5 className="head_info">Fetching Google news data</h5><br/>
-            </div>
-            <div className="map_div">
-              <div ref={el => this.mapContainer = el} className='mapContainer' />
-            </div>
-          </div>
-        )
-      }
     }
     else {
       const class1 = `map_div inactive`
