@@ -5,14 +5,24 @@
 
 .head {
   text-align: center;
-  vertical-align: middle;
-  line-height: 500px;
+  height: 40px;
+  position: absolute;
+  top: 4%;
+  left: 47%;
+}
+
+.head_info {
+  text-align: center;
+  height: 20px;
+  position: absolute;
+  top: 10%;
+  left: 47%;
 }
 
 .spinner {
   position: absolute;
-  top: 40%;
-  left: 37%;
+  top: 20%;
+  left: 38%;
   height: 500px;
   width: 500px;
 }

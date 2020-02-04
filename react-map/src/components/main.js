@@ -27,7 +27,7 @@ class Main_map extends React.Component {
   }
 
 
-  create_map = () =>{
+  create_map = () => {
     const data = this.props.cities;
     const articles = this.state.articles;
 
@@ -84,7 +84,7 @@ class Main_map extends React.Component {
   async test() {
     var tmp_arr = []
     for (let city of this.props.cities) {
-      this.setState({loading: true});
+      this.setState({ loading: true });
       const promise = await axios.get(`https://newsapi.org/v2/everything?q=${city.city_name}&apiKey=81ed2033ac864fa5bc932f088b9bbc44`);
       const status = promise.status;
       if (status === 200) {
@@ -107,7 +107,7 @@ class Main_map extends React.Component {
     }
 
     this.setState({ articles: tmp_arr }, () => {
-      this.setState({loading: false});
+      this.setState({ loading: false });
       this.create_map();
     })
   }
@@ -119,9 +119,9 @@ class Main_map extends React.Component {
   barsClick = () => {
     this.setState({ navig_open: !this.state.navig_open })
   }
-  cityFinder =(coors) => {
+  cityFinder = (coors) => {
     this.barsClick()
-    this.setState({ lat: coors[1], lng: coors[0], zoom:6 }, () => {
+    this.setState({ lat: coors[1], lng: coors[0], zoom: 6 }, () => {
       this.create_map();
     })
   }
@@ -129,36 +129,36 @@ class Main_map extends React.Component {
   render() {
     if (this.state.navig_open === false) {
       if (this.state.loading === false) {
-      return (
-        <div className="main">
-          <div className='sidebarStyle'>
-            <div className='corrs_div'>
-              <span className="corrs_name">Langitude: </span>
-            <Odometer value={this.state.lng} duration='3000' format="(.ddd)"/>
-            <span className="corrs_name">Latitude: </span>
-            <Odometer value={this.state.lat} format="(.ddd)" duration='5'/>
-            <span className="corrs_name">Zoom: </span>
-            <Odometer value={this.state.zoom} format="(.ddd)" duration={3000}/>
-            </div>
-            <div className="bars_div"><img onClick={this.barsClick} className="bar_img" src={bars} /></div>
-          </div>
-          <div className="map_div">
-            <div ref={el => this.mapContainer = el} className='mapContainer' />
-          </div>
-        </div>
-      )
-      }
-      else{
         return (
-        <div className="main">
-            <h1 className="loading_header">Loading...</h1>
-            <br/>
-            <h4 className="loading_header">Fetching Google news data</h4>
-            <div className="spinner">
-              <div class="loader"></div>
+          <div className="main">
+            <div className='sidebarStyle'>
+              <div className='corrs_div'>
+                <span className="corrs_name">Langitude: </span>
+                <Odometer value={this.state.lng} duration='3000' format="(.ddd)" />
+                <span className="corrs_name">Latitude: </span>
+                <Odometer value={this.state.lat} format="(.ddd)" duration='5' />
+                <span className="corrs_name">Zoom: </span>
+                <Odometer value={this.state.zoom} format="(.ddd)" duration={3000} />
+              </div>
+              <div className="bars_div"><img onClick={this.barsClick} className="bar_img" src={bars} /></div>
             </div>
-          <div ref={el => this.mapContainer = el} className='mapContainer'/>
-        </div>
+            <div className="map_div">
+              <div ref={el => this.mapContainer = el} className='mapContainer' />
+            </div>
+          </div>
+        )
+      }
+      else {
+        return (
+          <div className="main">
+            <div className='sidebarStyle'>
+              <h1 style={{position: "absolute", left: "47%", top: "4%"}}>Loading...</h1>
+              <h5 className="head_info">Fetching Google news data</h5><br/>
+            </div>
+            <div className="map_div">
+              <div ref={el => this.mapContainer = el} className='mapContainer' />
+            </div>
+          </div>
         )
       }
     }
@@ -168,13 +168,13 @@ class Main_map extends React.Component {
       return (
         <div className="main">
           <div className={class2} onClick={this.barsClick}>
-          <div className='corrs_div'>
+            <div className='corrs_div'>
               <span className="corrs_name">Langitude: </span>
-            <Odometer value={this.state.lng} duration='3000' format="(.ddd)"/>
-            <span className="corrs_name">Latitude: </span>
-            <Odometer value={this.state.lat} format="(.ddd)" duration='5'/>
-            <span className="corrs_name">Zoom: </span>
-            <Odometer value={this.state.zoom} format="(.ddd)" duration={3000}/>
+              <Odometer value={this.state.lng} duration='3000' format="(.ddd)" />
+              <span className="corrs_name">Latitude: </span>
+              <Odometer value={this.state.lat} format="(.ddd)" duration='5' />
+              <span className="corrs_name">Zoom: </span>
+              <Odometer value={this.state.zoom} format="(.ddd)" duration={3000} />
             </div>
 
 
@@ -184,7 +184,7 @@ class Main_map extends React.Component {
             <div ref={el => this.mapContainer = el} className='mapContainer' />
           </div>
           <CitiesContext.Provider value={this.state}>
-          <Navigation bars_handler={this.barsClick}/>
+            <Navigation bars_handler={this.barsClick} />
           </CitiesContext.Provider>
         </div>
       )

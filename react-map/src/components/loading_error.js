@@ -9,7 +9,7 @@ class Tmp extends React.Component {
         return(
             <div className="main">
             <h1 className="head">Loading...</h1><br/>
-            <h1 className="head">Loading...</h1><br/>
+            <h5 className="head_info">Fetching GraphQl data</h5><br/>
             <div className="spinner">
               <div class="loader"></div>
             </div>
@@ -19,7 +19,7 @@ class Tmp extends React.Component {
         else{
         return(
             <div className="main">
-            <h1 className="head" >Error occured {this.props.info}</h1>
+            <h1 className="head">Error occured {this.props.info}</h1>
             </div>
         )
         }

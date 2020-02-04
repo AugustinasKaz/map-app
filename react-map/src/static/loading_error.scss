@@ -1,21 +1,29 @@
 $body_color: #262626;
 $size: 500px;
 
-.main{
-    
-    color: white;
-    background-color: $body_color;
+.main{  
+  color: white;
+  background-color: $body_color;
 }
 
 .head{
     text-align: center;
-    vertical-align: middle;
-    line-height: $size;  
+    height:40px;
+    position:absolute;
+    top: 4%;
+    left:47%;
+}
+.head_info{
+    text-align: center;
+    height:20px;
+    position:absolute;
+    top: 10%;
+    left:47%;
 }
 .spinner{
     position: absolute;
-    top: 40%;
-    left: 37%;
+    top: 20%;
+    left: 38%;
     height: $size;
     width: $size;    
 }
