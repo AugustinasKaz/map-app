@@ -21,6 +21,7 @@ class Main_map extends React.Component {
       articles: [],
       cities: this.props.cities,
       setCity: this.cityFinder,
+      loading: false,
     };
     this.test = this.test.bind(this);
   }
@@ -83,6 +84,7 @@ class Main_map extends React.Component {
   async test() {
     var tmp_arr = []
     for (let city of this.props.cities) {
+      this.setState({loading: true});
       const promise = await axios.get(`https://newsapi.org/v2/everything?q=${city.city_name}&apiKey=81ed2033ac864fa5bc932f088b9bbc44`);
       const status = promise.status;
       if (status === 200) {
@@ -105,6 +107,7 @@ class Main_map extends React.Component {
     }
 
     this.setState({ articles: tmp_arr }, () => {
+      this.setState({loading: false});
       this.create_map();
     })
   }
@@ -125,6 +128,7 @@ class Main_map extends React.Component {
 
   render() {
     if (this.state.navig_open === false) {
+      if (this.state.loading === false) {
       return (
         <div className="main">
           <div className='sidebarStyle'>
@@ -143,6 +147,20 @@ class Main_map extends React.Component {
           </div>
         </div>
       )
+      }
+      else{
+        return (
+        <div className="main">
+            <h1 className="loading_header">Loading...</h1>
+            <br/>
+            <h4 className="loading_header">Fetching Google news data</h4>
+            <div className="spinner">
+              <div class="loader"></div>
+            </div>
+          <div ref={el => this.mapContainer = el} className='mapContainer'/>
+        </div>
+        )
+      }
     }
     else {
       const class1 = `map_div inactive`

@@ -81,6 +81,12 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+.loading_header {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 24px;
+}
+
 @media only screen and (max-width: 768px) {
   .corrs_div {
     height: 40px;

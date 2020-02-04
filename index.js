@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-const DATABASE_URL = 'postgres://xgemsdtxhdbdmf:b16715f5b5a2d2be9f8ab5c034d6f9c410c80f0652987c186ad5e9a88740e565@ec2-34-193-42-173.compute-1.amazonaws.com:5432/ddt0bch2hsg32t'
+const DATABASE_URL = 'postgres://yrmojtsjkkgcfa:e271eccf69f35debd2922b46d90d32dc6ffda1fd2539e792a477755aceac9d31@ec2-34-203-32-44.compute-1.amazonaws.com:5432/d6uptu974fpefd'
 
 app.post('/api/addUser', (req, res) => {
     let user = req.body.user;

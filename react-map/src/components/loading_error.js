@@ -8,16 +8,19 @@ class Tmp extends React.Component {
         if(this.props.info === 'Loading'){
         return(
             <div className="main">
-            <h1 className="head">Loading</h1>
+            <h1 className="head">Loading...</h1><br/>
+            <h1 className="head">Loading...</h1><br/>
             <div className="spinner">
-
+              <div class="loader"></div>
             </div>
             </div>
         )
         }
         else{
         return(
-            <h1>Error occured</h1>
+            <div className="main">
+            <h1 className="head" >Error occured {this.props.info}</h1>
+            </div>
         )
         }
     }
