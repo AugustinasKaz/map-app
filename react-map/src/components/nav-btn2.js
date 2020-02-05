@@ -71,7 +71,7 @@ class Favorites_list extends React.Component {
 
 
     render() {
-      localStorage.removeItem("user");
+      //localStorage.removeItem("user");
       if (this.state.user === null) {
         if (this.state.dropdown_open === true) {
           return (

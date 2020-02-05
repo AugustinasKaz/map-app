@@ -128,6 +128,7 @@ class Main_map extends React.Component {
 
   render() {
     if (this.state.navig_open === false) {
+      if (this.state.loading === false) {
         return (
           <div className="main">
             <div className='sidebarStyle'>
@@ -146,13 +147,27 @@ class Main_map extends React.Component {
             </div>
           </div>
         )
+      }
+      else {
+        return (
+          <div className="main">
+            <div className='sidebarStyle'>
+              <h1 style={{position: "absolute", left: "47%", top: "4%"}}>Loading...</h1>
+              <h5 className="head_info">Fetching Google news data</h5><br/>
+            </div>
+            <div className="map_div">
+              <div ref={el => this.mapContainer = el} className='mapContainer' />
+            </div>
+          </div>
+        )
+      }
     }
     else {
       const class1 = `map_div inactive`
       const class2 = `sidebarStyle inactive`
       return (
         <div className="main">
-          <div className={class2} onClick={this.barsClick}>
+          <div className={class2} onMouseDown={this.barsClick}>
             <div className='corrs_div'>
               <span className="corrs_name">Langitude: </span>
               <Odometer value={this.state.lng} duration='3000' format="(.ddd)" />
@@ -161,11 +176,8 @@ class Main_map extends React.Component {
               <span className="corrs_name">Zoom: </span>
               <Odometer value={this.state.zoom} format="(.ddd)" duration={3000} />
             </div>
-
-
           </div>
-
-          <div className={class1} onClick={this.barsClick}>
+          <div className={class1} onMouseDown={this.barsClick}>
             <div ref={el => this.mapContainer = el} className='mapContainer' />
           </div>
           <CitiesContext.Provider value={this.state}>
