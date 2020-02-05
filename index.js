@@ -1,12 +1,15 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
+//const cors = require('cors');
 var bodyParser = require("body-parser");
+const port = process.env.PORT || 5000;
 const { Client } = require('pg');
 
+
+app.use(express.static(path.join(__dirname, 'react-map/build')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+//app.use(cors());
 
 const DATABASE_URL = 'postgres://yrmojtsjkkgcfa:e271eccf69f35debd2922b46d90d32dc6ffda1fd2539e792a477755aceac9d31@ec2-34-203-32-44.compute-1.amazonaws.com:5432/d6uptu974fpefd'
 
@@ -56,6 +59,8 @@ app.post('/api/getUsersCities', (req, res) => {
     })
 })
 
-app.listen(4000, () => {
-    console.log('Server is running on port 4000')
-})
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/react-map/build/index.html'));
+});
+
+app.listen(port, () => console.log(`app listening on port ${port}!`))
