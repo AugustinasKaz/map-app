@@ -27,7 +27,7 @@ function App(){
             {({ loading, error, data}) => {
               if (error) return <Tmp  info={error}/>;
               if (loading) return <Tmp info='Loading'/>;
-              return <Main_map cities={data.cities}/>;
+              return newFunction(data);
             }}
           </Query>
          
@@ -37,3 +37,7 @@ function App(){
 }
 
 export default App;
+
+function newFunction(data) {
+  return <Main_map cities={data.cities} />;
+}
