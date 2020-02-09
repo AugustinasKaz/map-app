@@ -57,4 +57,9 @@
   padding: 5px;
   margin: 2px;
 }
+
+.favCityList {
+  height: 120px;
+  overflow: scroll;
+}
 /*# sourceMappingURL=nav-style.css.map */

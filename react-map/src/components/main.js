@@ -7,6 +7,7 @@ import "odometer/themes/odometer-theme-train-station.css";
 import Navigation from './nav-menu'
 import axios from 'axios'
 import CitiesContext from './context'
+import { GoogleNews } from './APIfunction'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhlcnZhIiwiYSI6ImNrNWgzdTFxYzBkZHQzbnBlZTU5Z2llZW4ifQ.b83IAFYfoxLuLhXtrIUOhg';
 
@@ -23,7 +24,6 @@ class Main_map extends React.Component {
       setCity: this.cityFinder,
       loading: false,
     };
-    this.test = this.test.bind(this);
   }
 
 
@@ -81,39 +81,16 @@ class Main_map extends React.Component {
   }
 
 
-  async test() {
-    var tmp_arr = []
-    for (let city of this.props.cities) {
-      this.setState({ loading: true });
-      const promise = await axios.get(`https://newsapi.org/v2/everything?q=${city.city_name}&apiKey=81ed2033ac864fa5bc932f088b9bbc44`);
-      const status = promise.status;
-      if (status === 200) {
-        let tmp1 = [] //tmp array for titles
-        let tmp2 = [] ////tmp array for urls
-        let art_num;
-        if (promise.data.articles.length >= 3)
-          art_num = 3;
-        else
-          art_num = promise.data.articles.length;
-        for (var i = 0; i < art_num; i++) {
-          tmp1.push(promise.data.articles[i].title, promise.data.articles[i].url)
-          var tmp_obj = { city: city.city_name, title_url: tmp1 }
-        }
-        tmp_arr.push(tmp_obj)
-      }
-      else {
-        console.log(status)
-      }
-    }
+
+
+  async componentDidMount() {
+    this.setState({ loading: true });
+    let tmp_arr = await GoogleNews(this.props.cities)
 
     this.setState({ articles: tmp_arr }, () => {
       this.setState({ loading: false });
       this.create_map();
-    })
-  }
-
-  componentDidMount() {
-    this.test();
+    });
   }
 
   barsClick = () => {
@@ -152,8 +129,8 @@ class Main_map extends React.Component {
         return (
           <div className="main">
             <div className='sidebarStyle'>
-              <h1 style={{position: "absolute", left: "47%", top: "4%"}}>Loading...</h1>
-              <h5 className="head_info">Fetching Google news data</h5><br/>
+              <h1 style={{ position: "absolute", left: "47%", top: "4%" }}>Loading...</h1>
+              <h5 className="head_info">Fetching Google news data</h5><br />
             </div>
             <div className="map_div">
               <div ref={el => this.mapContainer = el} className='mapContainer' />

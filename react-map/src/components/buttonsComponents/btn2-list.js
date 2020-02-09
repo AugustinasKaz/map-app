@@ -14,7 +14,7 @@ function Favorites_list(props) {
   return (
     <CitiesContext.Consumer>
       {({ cities, setCity }) => (
-        <ul>
+        <ul className="favCityList">
           {filtered.map((el) =>
             <li onClick={() => setCity(el.coordinates)} key={el.city_id}>{el.city_name}</li>
           )}

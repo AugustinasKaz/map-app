@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import useAutocomplete from '@material-ui/lab/useAutocomplete';
 import CitiesContext from '../context'
 import '../../static/nav-style.css'
-import axios from 'axios'
+import { AddNewCity } from '../APIfunction'
 
 export default function Autocomplete(props) {
   const cities = useContext(CitiesContext);
@@ -20,15 +20,15 @@ export default function Autocomplete(props) {
     getOptionLabel: option => option.city_name,
   });
 
-  async function addNewCity(){
+  async function addCity(){
     setError(error = `Adding ${input} to the list`)
-    const promise = await axios.post('http://localhost:4000/api/addUserCity', {user: props.user, city: input})
-    const status = promise.status
-    if (status === 200) {
+    let response = await AddNewCity(props.user, input)
+    if (response.status === 'success') {
       setError(error = 'Add new city')
+      setInput(input = " ")
     }
     else
-      setError(error = `Failed ${status}`)
+      setError(error = response.detail)
   }
 
   function validate(e) {
@@ -38,7 +38,7 @@ export default function Autocomplete(props) {
         return elem.city_name === input
       })
       if(city_exists.length === 1){
-        addNewCity();
+        addCity();
       }
       else
         setError(error = "city does not exist")
