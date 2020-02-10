@@ -5,7 +5,6 @@ import bars from '../static/media/abc.jpg';
 import Odometer from "react-odometerjs";
 import "odometer/themes/odometer-theme-train-station.css";
 import Navigation from './nav-menu'
-import axios from 'axios'
 import CitiesContext from './context'
 import { GoogleNews } from './APIfunction'
 
