@@ -22,7 +22,7 @@ class Nav_menu extends React.Component {
     return (
         <div className="over1">
             <div className="header">
-              <img onClick={this.props.bars_handler} className="img_arrows" src={arrows}/>
+              <img alt="img-logo" onClick={this.props.bars_handler} className="img_arrows" src={arrows}/>
               <h1 className="header_text">Menu</h1>
             </div>
             <div className="menu-display">

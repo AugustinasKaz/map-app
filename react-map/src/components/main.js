@@ -35,7 +35,7 @@ class Main_map extends React.Component {
       style: 'mapbox://styles/therva/ck5y2mbes1r701inp9asjpdaa',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
-
+      maxZoom: 7,
     });
 
     map.on('move', () => {
@@ -116,7 +116,7 @@ class Main_map extends React.Component {
                 <span className="corrs_name">Zoom: </span>
                 <Odometer value={this.state.zoom} format="(.ddd)" duration={3000} />
               </div>
-              <div className="bars_div"><img onClick={this.barsClick} className="bar_img" src={bars} /></div>
+              <div className="bars_div"><img alt="bars-logo" onClick={this.barsClick} className="bar_img" src={bars} /></div>
             </div>
             <div className="map_div">
               <div ref={el => this.mapContainer = el} className='mapContainer' />

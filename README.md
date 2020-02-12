@@ -2,16 +2,16 @@
 ## Structure
 
 `./react-map/src/components` - all functional and class based components 
-<br />
+<br /><br />
 `./react-map/src/static` - contains SASS and CSS files 
-<br />
+<br /><br />
 `./react-map/src/static/media` - png files that are used in application 
-<br />
+<br /><br />
 `./react-map/src/components/buttonsComponents` - all components that are used in menu buttons 
-<br />
+<br /><br />
 `./react-map/src/components/APIfunction.js` - stores all functions that are used for API or server calls 
-<br />
+<br /><br />
 `./index.js` - express server file 
-<br />
+<br /><br />
 `./schema.js` - GraphQL schema file(not used bc of Hasura) 
-<br />
+<br /><br />

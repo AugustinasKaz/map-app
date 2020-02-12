@@ -1,13 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import useAutocomplete from '@material-ui/lab/useAutocomplete';
 import CitiesContext from '../context'
 import '../../static/nav-style.css'
-import { AddNewCity } from '../APIfunction'
+import { AddNewCity, GetUsersCities } from '../APIfunction'
+import List from './btn2-list'
 
 export default function Autocomplete(props) {
   const cities = useContext(CitiesContext);
   let [input, setInput] = useState(" ");
   let [error, setError] = useState("Add new city");
+  let [Ucities, setCities] = useState({});
+
   const {
     getRootProps,
     getInputProps,
@@ -20,12 +23,24 @@ export default function Autocomplete(props) {
     getOptionLabel: option => option.city_name,
   });
 
+  async function fetchCities(){
+  let response = await GetUsersCities(props.user);
+      if(response.status === 'success'){
+        if(response.detail.favorite_cities !== null)
+          setCities(Ucities = response.detail.favorite_cities)
+      }
+  }
+
+  useEffect(() => {
+    fetchCities();
+  }, [])
+
   async function addCity(){
     setError(error = `Adding ${input} to the list`)
     let response = await AddNewCity(props.user, input)
     if (response.status === 'success') {
       setError(error = 'Add new city')
-      setInput(input = " ")
+      fetchCities();
     }
     else
       setError(error = response.detail)
@@ -59,6 +74,7 @@ export default function Autocomplete(props) {
           ))}
         </div>
       ) : null}
+       {Object.entries(Ucities).length === 0 && Ucities.constructor === Object ? <h4>List is empty</h4> : <List userCities={Ucities}/>}
     </div>
   );
 }
