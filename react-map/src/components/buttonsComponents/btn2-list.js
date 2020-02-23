@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import '../../static/nav-style.css'
+import ClearIcon from '../icons/nav-btn2-icon';
 import CitiesContext from '../context'
 
 function Favorites_list(props) {
@@ -17,7 +18,14 @@ function Favorites_list(props) {
       {({ cities, setCity }) => (
         <ul className="favCityList">
           {filtered.map((el) =>
-            <li onClick={() => setCity(el.coordinates)} key={el.city_id}>{el.city_name}</li>
+            <li key={el.city_id} className="wrapper">
+              <div className="col1">
+              <label className="favListName" onClick={() => setCity(el.coordinates)}>{el.city_name}</label>
+              </div>
+              <div className="col2">
+              <ClearIcon data={el.city_name} user={props.user}/>
+              </div>
+            </li>
           )}
         </ul>
       )}

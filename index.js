@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-//const cors = require('cors');
+const cors = require('cors');
 var bodyParser = require("body-parser");
 const port = process.env.PORT || 5000;
 const { Client } = require('pg');
@@ -10,7 +10,7 @@ const { Client } = require('pg');
 app.use(express.static(path.join(__dirname, 'react-map/build')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//app.use(cors());
+app.use(cors());
 
 const DATABASE_URL = 'postgres://yrmojtsjkkgcfa:e271eccf69f35debd2922b46d90d32dc6ffda1fd2539e792a477755aceac9d31@ec2-34-203-32-44.compute-1.amazonaws.com:5432/d6uptu974fpefd'
 
@@ -22,6 +22,22 @@ app.post('/api/addNewUser', (req, res) => {
     });
     client.connect();
     client.query("INSERT INTO users(username)VALUES('"+user+"');", (err, response) => {
+        if (err)
+            res.json(err);
+        else 
+            res.json(response);
+    })
+})
+
+app.post('/api/removeCity', (req, res) => {
+    let user = req.body.user;
+    let city = req.body.city;
+    const client = new Client({
+        connectionString: DATABASE_URL,
+        ssl: true,
+    });
+    client.connect();
+    client.query("UPDATE users SET favorite_cities = array_remove(favorite_cities,'"+city+"') WHERE username = '"+user+"';", (err, response) => {
         if (err)
             res.json(err);
         else 

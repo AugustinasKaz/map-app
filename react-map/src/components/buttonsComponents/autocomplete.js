@@ -26,7 +26,7 @@ export default function Autocomplete(props) {
   async function fetchCities(){
   let response = await GetUsersCities(props.user);
       if(response.status === 'success'){
-        if(response.detail.favorite_cities !== null)
+        if(response.detail.favorite_cities !== null || response.detail.favorite_cities !== undefined)
           setCities(Ucities = response.detail.favorite_cities)
       }
   }
@@ -74,7 +74,7 @@ export default function Autocomplete(props) {
           ))}
         </div>
       ) : null}
-       {Object.entries(Ucities).length === 0 && Ucities.constructor === Object ? <h4>List is empty</h4> : <List userCities={Ucities}/>}
+       {Object.entries(Ucities).length === 0 && Ucities.constructor === Object ? <h4>Loading...</h4> : <List userCities={Ucities} user={props.user}/>}
     </div>
   );
 }

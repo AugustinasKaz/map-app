@@ -11,7 +11,7 @@ class Tmp extends React.Component {
             <h1 className="head">Loading...</h1><br/>
             <h5 className="head_info">Fetching GraphQl data</h5><br/>
             <div className="spinner">
-              <div class="loader"></div>
+              <div className="loader"></div>
             </div>
             </div>
         )

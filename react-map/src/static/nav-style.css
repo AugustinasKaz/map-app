@@ -59,7 +59,32 @@
 }
 
 .favCityList {
-  height: 120px;
+  height: 180px;
   overflow: scroll;
+}
+
+.favListName:hover {
+  cursor: pointer;
+  color: #ffbb00;
+}
+
+.wrapper {
+  text-align: left;
+  width: auto;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.col1 {
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+}
+
+.col2 {
+  display: inline-block;
+  width: 20%;
 }
 /*# sourceMappingURL=nav-style.css.map */

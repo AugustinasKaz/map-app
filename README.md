@@ -1,11 +1,10 @@
-
 ## Structure
 
 `./react-map/src/components` - all functional and class based components 
 <br /><br />
 `./react-map/src/static` - contains SASS and CSS files 
 <br /><br />
-`./react-map/src/static/media` - png files that are used in application 
+`./react-map/src/components/icons` - default/customized Material-UI icons used in application 
 <br /><br />
 `./react-map/src/components/buttonsComponents` - all components that are used in menu buttons 
 <br /><br />
@@ -15,3 +14,7 @@
 <br /><br />
 `./schema.js` - GraphQL schema file(not used bc of Hasura) 
 <br /><br />
+
+## Structure
+
+

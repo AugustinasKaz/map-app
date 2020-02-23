@@ -16,6 +16,22 @@ export async function AddNewUser(userInput) {
     return response;
 }
 
+export async function RemoveCity(city, user) {
+    const promise = await axios.post('/api/removeCity', { city: city, user: user});
+    const status = promise.status
+    var response = {};
+    if (status === 200) {
+      let res = promise.data
+      if (res.name === 'error')
+        response = {status: 'error', detail: res.detail}
+      else
+        response = {status: 'success', detail: " "}
+    }
+    else 
+        response = {status: 'error', detail: `Failed ${status}`}
+    return response;
+}
+
 export async function GetUsersCities(username){
     const promise = await axios.post('/api/getUsersCities', { user: username });
     const status = promise.status

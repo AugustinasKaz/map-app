@@ -5,7 +5,6 @@
   padding: 16px;
   font-size: 16px;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
@@ -13,7 +12,6 @@
     background-color: rgba(107, 104, 104, 0.671)
   }
 }
-
 .dropdown-content {
   display: block;
   min-height: 300px;
@@ -25,7 +23,6 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
-
 .dropdown-content li {
   color: white;
   padding: 12px 16px;
@@ -36,7 +33,6 @@
       opacity:0.5;
   }
 }
-
 .user-input{
   width: 90%;
   padding:5px;
@@ -47,7 +43,6 @@
     border: 2px solid rgb(255, 187, 0);
   }
 }
-
 .user-input2{
   width: 90%;
   padding:5px;
@@ -55,8 +50,31 @@
 }
 
 .favCityList{
-  height:120px;
+  height:180px;
   overflow: scroll;
+}
+
+.favListName{
+  &:hover{
+    cursor: pointer;
+    color: rgb(255, 187, 0);
+}
+}
+
+.wrapper {
+  text-align: left;
+  width: auto;
+  position: relative;
+  display: flex;
+}
+.col1 {
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+}
+.col2 {
+  display: inline-block;
+  width: 20%;
 }
 
 
