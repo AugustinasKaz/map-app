@@ -1,7 +1,7 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import '../static/main_map.css'
-import bars from '../static/media/abc.jpg';
+import Bars from './icons/main-header-icon';
 import Odometer from "react-odometerjs";
 import "odometer/themes/odometer-theme-train-station.css";
 import Navigation from './nav-menu'
@@ -116,7 +116,7 @@ class Main_map extends React.Component {
                 <span className="corrs_name">Zoom: </span>
                 <Odometer value={this.state.zoom} format="(.ddd)" duration={3000} />
               </div>
-              <div className="bars_div"><img alt="bars-logo" onClick={this.barsClick} className="bar_img" src={bars} /></div>
+              <div className="bars_div" onClick={this.barsClick}><Bars className="bar_img"/></div>
             </div>
             <div className="map_div">
               <div ref={el => this.mapContainer = el} className='mapContainer' />
@@ -143,7 +143,7 @@ class Main_map extends React.Component {
       const class2 = `sidebarStyle inactive`
       return (
         <div className="main">
-          <div className={class2} onMouseDown={this.barsClick}>
+          <div className={class2} onMouseDown={this.barsClick} >
             <div className='corrs_div'>
               <span className="corrs_name">Langitude: </span>
               <Odometer value={this.state.lng} duration='3000' format="(.ddd)" />

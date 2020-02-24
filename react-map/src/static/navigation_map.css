@@ -10,20 +10,19 @@
   padding: 10px;
 }
 
-.header {
+.wrapper {
   height: 40px;
-  width: 100%;
+  width: auto;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-.header_text {
-  display: inline;
-  font-size: 40px;
-  margin-left: 20%;
-}
-
-.img_arrows {
-  width: 40px;
-  height: 40px;
+.header-text {
+  position: absolute;
+  top: -20px;
+  left: 25%;
 }
 
 .menu-display {

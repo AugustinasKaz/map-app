@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {RemoveCity} from '../APIfunction'
 
 
-export default function SvgMaterialIcons(props) {
+export default function RemoveIcon(props) {
   const [open, setOpen] = React.useState(false);
   const [info, setInfo] = React.useState(`Remove ${props.data} from favorites list?`);
 
